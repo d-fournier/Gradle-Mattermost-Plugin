@@ -3,11 +3,22 @@ This gradle plugin allows you to post a message easily on Mattermost instance
 
 ## Usage
 ### Dependency
-Add the dependency to your buildscript
+Add the dependency to your buildscript.
+
+*The fashion way*
+```groovy
+plugin {
+    id "me.dfournier.gradle.mattermost" version "0.1.0-SNAPSHOT"
+}
+```
+
+*The old way*
 ```groovy
 buildscript {
   repositories {
-      // TODO Push the dependency to a public repository
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
   }
   dependencies {
       classpath "me.dfournier.gradle:mattermost:0.1.0-SNAPSHOT"
@@ -55,9 +66,13 @@ task("MyChatTask", type: me.dfournier.gradle.mattermost.MattermostTask) {
 }
 ```
 
+To post a message after each build, you can add task dependency
+```groovy
+
+```
+
+
 ## Improvements / TODO
-- Fix the `apply plugin` to use the alias instead of the class name
 - Update Error management
 - Update documentation (Code + ReadMe)
 - Add Usage sample
-- Add License

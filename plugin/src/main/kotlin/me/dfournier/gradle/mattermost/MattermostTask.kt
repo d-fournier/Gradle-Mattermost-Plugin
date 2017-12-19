@@ -44,7 +44,7 @@ open class MattermostTask() : DefaultTask() {
         }
 
         val dto = HookDto(
-                text!!,
+                text!!.trimIndent(),
                 currentConfiguration.username,
                 currentConfiguration.channel,
                 currentConfiguration.iconUrl

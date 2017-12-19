@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "me.dfournier.gradle:mattermost:$VERSION_NAME"
+    }
+}
+
+apply plugin: "me.dfournier.gradle.mattermost"
+apply plugin: "java"
+
+mattermost {
+    apiKey "XXXX"
+    endpoint "XXXX"
+}
+
+compileJava.finalizedBy task("postSuccessfulCompile", type: me.dfournier.gradle.mattermost.MattermostTask) {
+    doFirst {
+        text """
+            # CI Report on branch ${System.env.JAVA_HOME}
+            The build ${compileJava.state.failure != null ? "FAILED :x:" : "SUCCEED :white_check_mark:"}
+             """
+    }
+
+}
